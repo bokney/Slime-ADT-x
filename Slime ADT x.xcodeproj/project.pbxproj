@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF5292401E59F9BD0097D5DB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF52923F1E59F9BD0097D5DB /* main.c */; };
+		EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292461E59FAD70097D5DB /* slime_lists.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		EF52923C1E59F9BD0097D5DB /* Slime ADT x */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Slime ADT x"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF52923F1E59F9BD0097D5DB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		EF5292461E59FAD70097D5DB /* slime_lists.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_lists.c; sourceTree = "<group>"; };
+		EF5292471E59FAD70097D5DB /* slime_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_lists.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				EF52923F1E59F9BD0097D5DB /* main.c */,
+				EF5292461E59FAD70097D5DB /* slime_lists.c */,
+				EF5292471E59FAD70097D5DB /* slime_lists.h */,
 			);
 			path = "Slime ADT x";
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,
 				EF5292401E59F9BD0097D5DB /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

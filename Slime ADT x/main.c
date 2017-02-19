@@ -1,15 +1,20 @@
-//
+
 //  main.c
 //  Slime ADT x
-//
-//  Created by bokny on 19/02/2017.
-//  Copyright © 2017 bungo2dungo. All rights reserved.
-//
+//  for testing various
+//  ADTs intended for
+//  the slime system
+//  piss in a jar
+//  and call it honey
+//  i'll break your legs
+//  if you don't give me my money
+//  [19/02/2017]
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "slime_lists.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+int main(int argc, char **argv) {
+    
     return 0;
 }
