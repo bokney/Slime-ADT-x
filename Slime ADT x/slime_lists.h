@@ -6,8 +6,15 @@
 #ifndef slime_lists_h
 #define slime_lists_h
 
-// forward declaration llnode type
-typedef struct llnode_ llnode;
+typedef struct llnode_ {
+    void *data;
+    struct llnode_ *next;
+}llnode;
+
+//  //  mem  //  //
+
+// returns a newly created node
+llnode *ll_createNode(void);
 
 //  //  set  //  //
 
@@ -22,10 +29,14 @@ void ll_reverse(llnode **head);
 
 // get amount of nodes in a list
 unsigned int ll_count(llnode *head);
-// get a pointer node's data from the list
+
+// get node[number]'s data from the list
+// returns NULL if out of bounds
+// be sure to use ll_count beforehand
 void *ll_retrieve(llnode **head, unsigned int number);
 
-// get a node's data while deactivating it's node
+// get a node's data,
+// deactivating the node
 void *ll_pop(llnode **head);
 
 // get rid of any spare nodes

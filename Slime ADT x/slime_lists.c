@@ -8,20 +8,20 @@
 
 #include "slime_lists.h"
 
-struct llnode_ {
-    void *data;
-    struct llnode_ *next;
-};
-
+// basic arena
 llnode *spare = NULL;
 
-llnode *createNode(void) {
+llnode *ll_createNode(void) {
     llnode *newNode;
     if (spare != NULL) {
-        // printf("%i spare nodes \n", ll_count(spare));
         newNode = spare;
         spare = spare->next;
-    } else newNode = (llnode *)malloc(sizeof(llnode));
+    } else {
+        newNode = (llnode *)malloc(sizeof(llnode));
+        if (newNode == NULL) {
+            printf("Error allocating memory for new llnode!");
+            exit(EXIT_FAILURE); }
+    }
     newNode->data = NULL;
     newNode->next = NULL;
     return newNode;
@@ -29,7 +29,7 @@ llnode *createNode(void) {
 
 void ll_append(llnode **head, void *data) {
     // malloc a new node
-    llnode *newNode = createNode();
+    llnode *newNode = ll_createNode();
     // assign it's data
     newNode->data = data;
     // stick it at the end of head
@@ -42,7 +42,7 @@ void ll_append(llnode **head, void *data) {
 
 void ll_prepend(llnode **head, void *data) {
     // malloc a new node
-    llnode *newNode = createNode();
+    llnode *newNode = ll_createNode();
     // assign it's data
     newNode->data = data;
     // stick it at the beginning of head
@@ -109,6 +109,7 @@ void ll_purge_spare(void) {
     for (int i = 0; i != count; i++) {
         llnode *tmpNode = spare;
         spare = spare->next;
+        tmpNode->data = NULL;
         free(tmpNode);
     }
 }

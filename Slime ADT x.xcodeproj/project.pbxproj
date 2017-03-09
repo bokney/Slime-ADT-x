@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EF5292401E59F9BD0097D5DB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF52923F1E59F9BD0097D5DB /* main.c */; };
 		EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292461E59FAD70097D5DB /* slime_lists.c */; };
+		EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */; };
+		EFE06BFD1E61CD5300B010C8 /* slime_list_arenas.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		EF52923F1E59F9BD0097D5DB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EF5292461E59FAD70097D5DB /* slime_lists.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_lists.c; sourceTree = "<group>"; };
 		EF5292471E59FAD70097D5DB /* slime_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_lists.h; sourceTree = "<group>"; };
+		EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_priority_lists.c; sourceTree = "<group>"; };
+		EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_priority_lists.h; sourceTree = "<group>"; };
+		EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_arenas.c; sourceTree = "<group>"; };
+		EFE06BFC1E61CD5300B010C8 /* slime_list_arenas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_list_arenas.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,10 @@
 				EF52923F1E59F9BD0097D5DB /* main.c */,
 				EF5292461E59FAD70097D5DB /* slime_lists.c */,
 				EF5292471E59FAD70097D5DB /* slime_lists.h */,
+				EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */,
+				EFE06BFC1E61CD5300B010C8 /* slime_list_arenas.h */,
+				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
+				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
 			);
 			path = "Slime ADT x";
 			sourceTree = "<group>";
@@ -125,6 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,
+				EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */,
+				EFE06BFD1E61CD5300B010C8 /* slime_list_arenas.c in Sources */,
 				EF5292401E59F9BD0097D5DB /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +264,7 @@
 				EF5292451E59F9BD0097D5DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
