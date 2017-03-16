@@ -30,3 +30,74 @@ llarena *llarenaCreate(void *(*create)(void),
     newArena->destroy = destroy;
     return newArena;
 }
+
+void llarenaDestroy(llarena *arena) {
+    if (arena == NULL) {
+        printf("Error! Tried to destroy a NULL arena!\n");
+        exit(EXIT_FAILURE); }
+    // free list node's datas
+    llnode *traversal = arena->activeHead;
+    while (traversal != NULL) {
+        arena->destroy(llnodeGetData(traversal));
+        traversal = llnodeGetNext(traversal);
+    }
+    traversal = arena->inactiveHead;
+    while (traversal != NULL) {
+        arena->destroy(llnodeGetData(traversal));
+        traversal = llnodeGetNext(traversal);
+    }
+    // free the lists themselves
+    llDestroy(&arena->activeHead);
+    llDestroy(&arena->inactiveHead);
+    // free the arena
+    free(arena);
+    arena = NULL;
+}
+
+void *llarenaPush(llarena *arena) {
+    if (arena == NULL) {
+        printf("Error! Tried to push to a NULL arena!\n");
+        exit(EXIT_FAILURE); }
+    void *data;
+    if (arena->inactiveHead == NULL) {
+        data = arena->create();
+        llPrepend(&arena->activeHead, data);
+    } else {
+        llnode *node = arena->inactiveHead;
+        arena->inactiveHead = llnodeGetNext(arena->inactiveHead);
+        llnodeSetNext(node, arena->activeHead);
+        arena->activeHead = node;
+        data = llnodeGetData(node);
+    }
+    return data;
+}
+
+void *llarenaPop(llarena *arena) {
+    if (arena == NULL) {
+        printf("Error! Tried to pop from a NULL arena!\n");
+        exit(EXIT_FAILURE); }
+    if (arena->activeHead == NULL) {
+        return NULL;
+    } else {
+        llnode *node = arena->activeHead;
+        void *data = llnodeGetData(node);
+        arena->activeHead = llnodeGetNext(arena->activeHead);
+        llnodeSetNext(node, arena->inactiveHead);
+        arena->inactiveHead = node;
+        return data;
+    }
+}
+
+unsigned int llarenaCount(llarena *arena) {
+    if (arena == NULL) {
+        printf("Error! Tried to count nodes in a NULL arena!\n");
+        exit(EXIT_FAILURE); }
+    return llCount(arena->activeHead);
+}
+
+void llarenaReverse(llarena *arena) {
+    if (arena == NULL) {
+        printf("Error! Tried to reverse NULL arena!\n");
+        exit(EXIT_FAILURE); }
+    llReverse(&arena->activeHead);
+}

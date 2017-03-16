@@ -12,56 +12,63 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_lists.h"
+#include "slime_list_arenas.h"
 
-llnode *ourList = NULL;
+llarena *ourArena = NULL;
+
+typedef struct chungus_ {
+    char *string;
+}chungus;
+
+void *chuCreate(void) {
+    chungus *newChung = (chungus *)malloc(sizeof(chungus));
+    if (newChung == NULL) {
+        printf("Error creating that chungus!\n");
+        exit(EXIT_FAILURE); }
+    return newChung;
+}
+
+void chuInit(void *chu) {
+    if (chu == NULL) {
+        printf("Error! chuInit was passed NULL!\n");
+        exit(EXIT_FAILURE); }
+    chungus *theChung = chu;
+    theChung->string = NULL;
+}
+
+void chuDestroy(void *chu) {
+    if (chu == NULL) {
+        printf("Error! chuDestroy was passed NULL!\n");
+        exit(EXIT_FAILURE); }
+    free(chu);
+}
 
 int main(int argc, char **argv) {
     
-    printf("i counted %i nodes!\n", llCount(ourList));
+    ourArena = llarenaCreate(chuCreate, chuInit, chuDestroy);
     
-    llnode *nodePtrA = llnodeCreate();
-    llnode *nodePtrB = llnodeCreate();
-    llnodeSetData(nodePtrA, "piss spray, ");
-    llnodeSetData(nodePtrB, "everywhere!\n");
-    llnodeSetNext(nodePtrA, nodePtrB);
+    chungus *tmpChung;
+    tmpChung = llarenaPush(ourArena);
+    tmpChung->string = "slapping all over ";
+    tmpChung = llarenaPush(ourArena);
+    tmpChung->string = "boogie swinging dicks ";
+    tmpChung = llarenaPush(ourArena);
+    tmpChung->string = "the musk produced, from ";
+    tmpChung = llarenaPush(ourArena);
+    tmpChung->string = "once again, ";
     
-    ourList = nodePtrA;
+    printf("%i nodes detected\n\n", llarenaCount(ourArena));
     
-    llAppend(&ourList, "that musky smell...\n");
-    llPrepend(&ourList, "also, ");
-    llPrepend(&ourList, "nice clean buttholes!\n");
-    llPrepend(&ourList, "imagine the scenario...");
+    llarenaReverse(ourArena);
+    llarenaReverse(ourArena);
     
-    llnode *traversal = ourList;
-    
-    while (traversal != NULL) {
-        printf("%s", llnodeGetData(traversal));
-        traversal = llnodeGetNext(traversal);
+    chungus *retrieve = llarenaPop(ourArena);
+    while (retrieve != NULL) {
+        printf("%s", retrieve->string);
+        retrieve = llarenaPop(ourArena);
     }
     
-    traversal = ourList;
-    
-    printf("you heard it right, %s", llnodeGetData(llGetLastNode(ourList)));
-    
-    printf("i counted %i nodes!\n", llCount(ourList));
-    
-    printf("time to reverse!!\n\n");
-    
-    llReverse(&ourList);
-    
-    traversal = ourList;
-    
-    while (traversal != NULL) {
-        printf("%s", llnodeGetData(traversal));
-        traversal = llnodeGetNext(traversal);
-    }
-    
-    printf("\n\ni counted %i nodes!\n", llCount(ourList));
-    
-    llDestroy(&ourList);
-    
-    printf("after freeing, i count %i nodes!\n", llCount(ourList));
+    llarenaDestroy(ourArena);
     
     return 0;
 }
