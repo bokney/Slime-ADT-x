@@ -11,6 +11,7 @@
 		EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292461E59FAD70097D5DB /* slime_lists.c */; };
 		EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */; };
 		EFE06BFD1E61CD5300B010C8 /* slime_list_arenas.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */; };
+		EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_priority_lists.h; sourceTree = "<group>"; };
 		EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_arenas.c; sourceTree = "<group>"; };
 		EFE06BFC1E61CD5300B010C8 /* slime_list_arenas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_list_arenas.h; sourceTree = "<group>"; };
+		EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_nodes.c; sourceTree = "<group>"; };
+		EFE06BFF1E7A10A600B010C8 /* slime_list_nodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_list_nodes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				EFE06BFC1E61CD5300B010C8 /* slime_list_arenas.h */,
 				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
 				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
+				EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */,
+				EFE06BFF1E7A10A600B010C8 /* slime_list_nodes.h */,
 			);
 			path = "Slime ADT x";
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,
 				EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */,
 				EFE06BFD1E61CD5300B010C8 /* slime_list_arenas.c in Sources */,
+				EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */,
 				EF5292401E59F9BD0097D5DB /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

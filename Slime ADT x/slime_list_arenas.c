@@ -62,6 +62,7 @@ void llarenaDestroy(llarena *arena) {
         arena->inactiveHead = arena->inactiveHead->next;
         arena->destroy(tmpNode->data);
     }
+    // finally, free the arena itself
     free(arena);
     arena = NULL;
 }
@@ -69,6 +70,7 @@ void llarenaDestroy(llarena *arena) {
 void *llarenaPush(llarena *arena) {
     // check arena exists
     llarenaCheck(arena);
+    // pointers for node/data pair
     void *data;
     llnode *node;
     // check for inactive nodes
@@ -82,11 +84,13 @@ void *llarenaPush(llarena *arena) {
         node = arena->inactiveHead;
         data = arena->inactiveHead->data;
         arena->inactiveHead = arena->inactiveHead->next;
+        arena->amountInactive--;
     }
     // stick it at the start of active
     node->next = arena->activeHead;
     arena->activeHead = node;
     arena->init(data);
+    arena->amountActive++;
     return data;
 }
 
@@ -100,8 +104,19 @@ void *llarenaPop(llarena *arena) {
     } else {
         llnode *node = arena->activeHead;
         arena->activeHead = arena->activeHead->next;
-        node->next = arena->inactiveHead->next;
+        node->next = arena->inactiveHead;
         arena->inactiveHead = node;
+        arena->amountActive--;
+        arena->amountInactive++;
         return node->data;
     }
+}
+
+unsigned int llarenaCount(llarena *arena) {
+    llarenaCheck(arena);
+    unsigned int doubleCheck = ll_count(arena->activeHead);
+    if (doubleCheck != arena->amountActive) {
+        printf("llarenaCount is off!!! wth?!?\n");
+    }
+    return arena->amountActive;
 }

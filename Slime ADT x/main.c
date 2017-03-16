@@ -38,16 +38,25 @@ void testDestroy(void *data) {
     data = NULL;
 }
 
-
 int main(int argc, char **argv) {
     
     llarena *testArena = llarenaCreate(testCreate, testInit, testDestroy);
     testStruct *tmpStruct = llarenaPush(testArena);
     tmpStruct->number = 4;
     tmpStruct->string = "WAllaAAAA";
-    tmpStruct = NULL;
-    tmpStruct = llarenaPop(testArena);
-    printf("tmpStruct->number = %i,\ntmpStruct->string = %s\n", tmpStruct->number, tmpStruct->string);
+    tmpStruct = llarenaPush(testArena);
+    tmpStruct->number = 8;
+    tmpStruct->string = "ooOOogie";
+    tmpStruct = llarenaPush(testArena);
+    tmpStruct->number = 6;
+    tmpStruct->string = "gung";
+    tmpStruct = llarenaPush(testArena);
+    tmpStruct = llarenaPush(testArena);
+
+    while (testArena->activeHead != NULL) {
+        tmpStruct = llarenaPop(testArena);
+        printf("tmpStruct->number = %i,\ntmpStruct->string = %s\n", tmpStruct->number, tmpStruct->string);
+    }
     
     return 0;
 }
