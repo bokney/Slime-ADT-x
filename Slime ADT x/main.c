@@ -12,51 +12,56 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_list_arenas.h"
+#include "slime_lists.h"
 
-typedef struct testStruct_ {
-    int number;
-    char *string;
-}testStruct;
-
-void *testCreate(void) {
-    testStruct *newStruct = malloc(sizeof(testStruct));
-    if (newStruct == NULL) {
-        printf("Error allocating memory for new testStruct!\n");
-        exit(EXIT_FAILURE); }
-    return newStruct;
-}
-
-void testInit(void *data) {
-    testStruct *ts = (testStruct *)data;
-    ts->number = 0;
-    ts->string = "BONGER!";
-}
-
-void testDestroy(void *data) {
-    free(data);
-    data = NULL;
-}
+llnode *ourList = NULL;
 
 int main(int argc, char **argv) {
     
-    llarena *testArena = llarenaCreate(testCreate, testInit, testDestroy);
-    testStruct *tmpStruct = llarenaPush(testArena);
-    tmpStruct->number = 4;
-    tmpStruct->string = "WAllaAAAA";
-    tmpStruct = llarenaPush(testArena);
-    tmpStruct->number = 8;
-    tmpStruct->string = "ooOOogie";
-    tmpStruct = llarenaPush(testArena);
-    tmpStruct->number = 6;
-    tmpStruct->string = "gung";
-    tmpStruct = llarenaPush(testArena);
-    tmpStruct = llarenaPush(testArena);
-
-    while (testArena->activeHead != NULL) {
-        tmpStruct = llarenaPop(testArena);
-        printf("tmpStruct->number = %i,\ntmpStruct->string = %s\n", tmpStruct->number, tmpStruct->string);
+    printf("i counted %i nodes!\n", llCount(ourList));
+    
+    llnode *nodePtrA = llnodeCreate();
+    llnode *nodePtrB = llnodeCreate();
+    llnodeSetData(nodePtrA, "piss spray, ");
+    llnodeSetData(nodePtrB, "everywhere!\n");
+    llnodeSetNext(nodePtrA, nodePtrB);
+    
+    ourList = nodePtrA;
+    
+    llAppend(&ourList, "that musky smell...\n");
+    llPrepend(&ourList, "also, ");
+    llPrepend(&ourList, "nice clean buttholes!\n");
+    llPrepend(&ourList, "imagine the scenario...");
+    
+    llnode *traversal = ourList;
+    
+    while (traversal != NULL) {
+        printf("%s", llnodeGetData(traversal));
+        traversal = llnodeGetNext(traversal);
     }
+    
+    traversal = ourList;
+    
+    printf("you heard it right, %s", llnodeGetData(llGetLastNode(ourList)));
+    
+    printf("i counted %i nodes!\n", llCount(ourList));
+    
+    printf("time to reverse!!\n\n");
+    
+    llReverse(&ourList);
+    
+    traversal = ourList;
+    
+    while (traversal != NULL) {
+        printf("%s", llnodeGetData(traversal));
+        traversal = llnodeGetNext(traversal);
+    }
+    
+    printf("\n\ni counted %i nodes!\n", llCount(ourList));
+    
+    llDestroy(&ourList);
+    
+    printf("after freeing, i count %i nodes!\n", llCount(ourList));
     
     return 0;
 }

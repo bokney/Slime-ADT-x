@@ -8,11 +8,7 @@
 #include "slime_list_arenas.h"
 #include "slime_lists.h"
 
-//#define LLARENA_CHUNK_SIZE  10
-
 struct llarena_ {
-    unsigned int amountActive;
-    unsigned int amountInactive;
     llnode *activeHead;
     llnode *inactiveHead;
     void *(*create)(void);
@@ -20,103 +16,17 @@ struct llarena_ {
     void (*destroy)(void *data);
 };
 
-void llarenaCheck(llarena *arena) {
-    if (arena == NULL) {
-        printf("Error! passed a NULL llarena!\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
 llarena *llarenaCreate(void *(*create)(void),
                        void (*init)(void *),
                        void (*destroy)(void *)) {
-    // allocate & check memory for new arena
     llarena *newArena = (llarena *)malloc(sizeof(llarena));
     if (newArena == NULL) {
         printf("Error allocating memory for new llarena!\n");
         exit(EXIT_FAILURE); }
-    // initialise arena
+    newArena->activeHead = NULL;
+    newArena->inactiveHead = NULL;
     newArena->create = create;
     newArena->init = init;
     newArena->destroy = destroy;
-    newArena->activeHead = NULL;
-    newArena->inactiveHead = NULL;
-    newArena->amountActive = 0;
-    newArena->amountInactive = 0;
     return newArena;
-}
-
-void llarenaDestroy(llarena *arena) {
-    // check arena exists
-    llarenaCheck(arena);
-    llnode *tmpNode;
-    // destroy all active
-    while (arena->activeHead != NULL) {
-        tmpNode = arena->activeHead;
-        arena->activeHead = arena->activeHead->next;
-        arena->destroy(tmpNode->data);
-    }
-    // destroy all inactive
-    while (arena->inactiveHead != NULL) {
-        tmpNode = arena->inactiveHead;
-        arena->inactiveHead = arena->inactiveHead->next;
-        arena->destroy(tmpNode->data);
-    }
-    // finally, free the arena itself
-    free(arena);
-    arena = NULL;
-}
-
-void *llarenaPush(llarena *arena) {
-    // check arena exists
-    llarenaCheck(arena);
-    // pointers for node/data pair
-    void *data;
-    llnode *node;
-    // check for inactive nodes
-    if (arena->inactiveHead == NULL) {
-        // create new node/data pair
-        data = arena->create();
-        node = ll_createNode();
-        node->data = data;
-    } else {
-        // grab inactive node/data pair
-        node = arena->inactiveHead;
-        data = arena->inactiveHead->data;
-        arena->inactiveHead = arena->inactiveHead->next;
-        arena->amountInactive--;
-    }
-    // stick it at the start of active
-    node->next = arena->activeHead;
-    arena->activeHead = node;
-    arena->init(data);
-    arena->amountActive++;
-    return data;
-}
-
-void *llarenaPop(llarena *arena) {
-    // check arena exists
-    llarenaCheck(arena);
-    // check for active nodes
-    if (arena->activeHead == NULL) {
-        // no active
-        return NULL;
-    } else {
-        llnode *node = arena->activeHead;
-        arena->activeHead = arena->activeHead->next;
-        node->next = arena->inactiveHead;
-        arena->inactiveHead = node;
-        arena->amountActive--;
-        arena->amountInactive++;
-        return node->data;
-    }
-}
-
-unsigned int llarenaCount(llarena *arena) {
-    llarenaCheck(arena);
-    unsigned int doubleCheck = ll_count(arena->activeHead);
-    if (doubleCheck != arena->amountActive) {
-        printf("llarenaCount is off!!! wth?!?\n");
-    }
-    return arena->amountActive;
 }

@@ -70,14 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				EF52923F1E59F9BD0097D5DB /* main.c */,
+				EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */,
+				EFE06BFF1E7A10A600B010C8 /* slime_list_nodes.h */,
 				EF5292461E59FAD70097D5DB /* slime_lists.c */,
 				EF5292471E59FAD70097D5DB /* slime_lists.h */,
 				EFE06BFB1E61CD5300B010C8 /* slime_list_arenas.c */,
 				EFE06BFC1E61CD5300B010C8 /* slime_list_arenas.h */,
 				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
 				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
-				EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */,
-				EFE06BFF1E7A10A600B010C8 /* slime_list_nodes.h */,
 			);
 			path = "Slime ADT x";
 			sourceTree = "<group>";
