@@ -5,57 +5,57 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_list_nodes.h"
+#include "slime_list_nodes_access.h"
 
-struct llnode_ {
+struct ll_node_ {
     void *data;
-    struct llnode_ *next;
+    struct ll_node_ *next;
 };
 
-llnode *llnodeCreate(void) {
-    llnode *newNode = (llnode *)malloc(sizeof(llnode));
+ll_node *ll_nodeCreate(void) {
+    ll_node *newNode = (ll_node *)malloc(sizeof(ll_node));
     if (newNode == NULL) {
-        printf("Error! Failed to create a new llnode!\n");
+        printf("Error! Failed to create a new ll_node!\n");
         exit(EXIT_FAILURE); }
-    llnodeSetData(newNode, NULL);
-    llnodeSetNext(newNode, NULL);
+    ll_nodeSetData(newNode, NULL);
+    ll_nodeSetNext(newNode, NULL);
     return newNode;
 }
 
-void llnodeDestroy(llnode *node) {
+void ll_nodeDestroy(ll_node *node) {
     if (node == NULL) {
-        printf("Error! llnode has already been freed?\n");
+        printf("Error! ll_node has already been freed?\n");
         exit(EXIT_FAILURE); }
     free(node);
     node = NULL;
 }
 
-void *llnodeGetData(llnode *node) {
+void *ll_nodeGetData(ll_node *node) {
     if (node == NULL) {
-        printf("Error! Tried to get data from a NULL llnode!\n");
+        printf("Error! Tried to get data from a NULL ll_node!\n");
         exit(EXIT_FAILURE);
     } else {
         return node->data;
     }
 }
 
-void llnodeSetData(llnode *node, void *data) {
+void ll_nodeSetData(ll_node *node, void *data) {
     if (node == NULL) {
-        printf("Error! Tried to set data of a NULL llnode!\n");
+        printf("Error! Tried to set data of a NULL ll_node!\n");
         exit(EXIT_FAILURE); }
     node->data = data;
 }
 
-llnode *llnodeGetNext(llnode *node) {
+ll_node *ll_nodeGetNext(ll_node *node) {
     if (node == NULL) {
-        printf("Error! Tried to get the node succeding a NULL llnode!\n");
+        printf("Error! Tried to get the node succeding a NULL ll_node!\n");
         exit(EXIT_FAILURE); }
     return node->next;
 }
 
-void llnodeSetNext(llnode *node, llnode *next) {
+void ll_nodeSetNext(ll_node *node, ll_node *next) {
     if (node == NULL) {
-        printf("Error! Tried to set the node succeding a NULL llnode!\n");
+        printf("Error! Tried to set the node succeding a NULL ll_node!\n");
         exit(EXIT_FAILURE); }
     node->next = next;
 }

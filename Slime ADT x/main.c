@@ -12,9 +12,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_list_arenas.h"
+#include "slime_list_stacks.h"
 
-llarena *ourArena = NULL;
+llstack *ourArena = NULL;
 
 typedef struct chungus_ {
     char *string;
@@ -45,30 +45,30 @@ void chuDestroy(void *chu) {
 
 int main(int argc, char **argv) {
     
-    ourArena = llarenaCreate(chuCreate, chuInit, chuDestroy);
+    ourArena = llstackCreate(chuCreate, chuInit, chuDestroy);
     
     chungus *tmpChung;
-    tmpChung = llarenaPush(ourArena);
+    tmpChung = llstackPush(ourArena);
     tmpChung->string = "slapping all over ";
-    tmpChung = llarenaPush(ourArena);
+    tmpChung = llstackPush(ourArena);
     tmpChung->string = "boogie swinging dicks ";
-    tmpChung = llarenaPush(ourArena);
+    tmpChung = llstackPush(ourArena);
     tmpChung->string = "the musk produced, from ";
-    tmpChung = llarenaPush(ourArena);
+    tmpChung = llstackPush(ourArena);
     tmpChung->string = "once again, ";
     
-    printf("%i nodes detected\n\n", llarenaCount(ourArena));
+    printf("%i nodes detected\n\n", llstackCount(ourArena));
     
-    llarenaReverse(ourArena);
-    llarenaReverse(ourArena);
+    llstackReverse(ourArena);
+    llstackReverse(ourArena);
     
-    chungus *retrieve = llarenaPop(ourArena);
+    chungus *retrieve = llstackPop(ourArena);
     while (retrieve != NULL) {
         printf("%s", retrieve->string);
-        retrieve = llarenaPop(ourArena);
+        retrieve = llstackPop(ourArena);
     }
     
-    llarenaDestroy(ourArena);
+    llstackDestroy(ourArena);
     
     return 0;
 }

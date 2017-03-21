@@ -6,17 +6,17 @@
 #ifndef slime_lists_h
 #define slime_lists_h
 
-#include "slime_list_nodes.h"
+#include "slime_list_nodes_reference.h"
 
-llnode *llGetLastNode(llnode *list);
+ll_node *llGetLastNode(ll_node *list);
 
-unsigned int llCount(llnode *list);
+unsigned int llCount(ll_node *list);
 
-void llAppend(llnode **list, void *data);
-void llPrepend(llnode **list, void *data);
+void llAppend(ll_node **list, void *data);
+void llPrepend(ll_node **list, void *data);
 
-void llDestroy(llnode **list);
+void llDestroy(ll_node **list);
 
-void llReverse(llnode **list);
+void llReverse(ll_node **list);
 
 #endif /* slime_lists_h */

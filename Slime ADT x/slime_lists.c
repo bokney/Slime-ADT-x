@@ -6,59 +6,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "slime_lists.h"
+#include "slime_list_nodes_access.h"
 
-llnode *llGetLastNode(llnode *list) {
-    llnode *curr = list;
-    llnode *prev = curr;
+ll_node *llGetLastNode(ll_node *list) {
+    ll_node *curr = list;
+    ll_node *prev = curr;
     while (curr != NULL) {
         prev = curr;
-        curr = llnodeGetNext(curr);
+        curr = ll_nodeGetNext(curr);
     }
     return prev;
 }
 
-unsigned int llCount(llnode *list) {
+unsigned int llCount(ll_node *list) {
     unsigned int count = 0;
-    llnode *traversal = list;
+    ll_node *traversal = list;
     while (traversal != NULL) {
         count++;
-        traversal = llnodeGetNext(traversal);
+        traversal = ll_nodeGetNext(traversal);
     }
     return count;
 }
 
-void llPrepend(llnode **list, void *data) {
-    llnode *newNode = llnodeCreate();
-    llnodeSetData(newNode, data);
-    llnodeSetNext(newNode, *list);
+void llPrepend(ll_node **list, void *data) {
+    ll_node *newNode = ll_nodeCreate();
+    ll_nodeSetData(newNode, data);
+    ll_nodeSetNext(newNode, *list);
     *list = newNode;
 }
 
-void llAppend(llnode **list, void *data) {
-    llnode *affix = llGetLastNode(*list);
-    llnode *newNode = llnodeCreate();
-    llnodeSetData(newNode, data);
-    llnodeSetNext(affix, newNode);
+void llAppend(ll_node **list, void *data) {
+    ll_node *affix = llGetLastNode(*list);
+    ll_node *newNode = ll_nodeCreate();
+    ll_nodeSetData(newNode, data);
+    ll_nodeSetNext(affix, newNode);
 }
 
-void llDestroy(llnode **list) {
-    llnode *traversal = *list;
-    llnode *byebye;
+void llDestroy(ll_node **list) {
+    ll_node *traversal = *list;
+    ll_node *byebye;
     while (traversal != NULL) {
         byebye = traversal;
-        traversal = llnodeGetNext(traversal);
-        llnodeDestroy(byebye);
+        traversal = ll_nodeGetNext(traversal);
+        ll_nodeDestroy(byebye);
     }
     *list = NULL;
 }
 
-void llReverse(llnode **list) {
-    llnode *prev = NULL;
-    llnode *curr = *list;
-    llnode *next;
+void llReverse(ll_node **list) {
+    ll_node *prev = NULL;
+    ll_node *curr = *list;
+    ll_node *next;
     while (curr != NULL) {
-        next = llnodeGetNext(curr);
-        llnodeSetNext(curr, prev);
+        next = ll_nodeGetNext(curr);
+        ll_nodeSetNext(curr, prev);
         prev = curr;
         curr = next;
     }
