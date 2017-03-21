@@ -9,7 +9,7 @@
 #include "slime_lists.h"
 #include "slime_list_nodes_access.h"
 
-struct llstack_ {
+struct ll_stack_ {
     ll_node *activeHead;
     ll_node *inactiveHead;
     void *(*create)(void);
@@ -17,12 +17,12 @@ struct llstack_ {
     void (*destroy)(void *data);
 };
 
-llstack *llstackCreate(void *(*create)(void),
+ll_stack *ll_stackCreate(void *(*create)(void),
                        void (*init)(void *),
                        void (*destroy)(void *)) {
-    llstack *newstack = (llstack *)malloc(sizeof(llstack));
+    ll_stack *newstack = (ll_stack *)malloc(sizeof(ll_stack));
     if (newstack == NULL) {
-        printf("Error allocating memory for new llstack!\n");
+        printf("Error allocating memory for new ll_stack!\n");
         exit(EXIT_FAILURE); }
     newstack->activeHead = NULL;
     newstack->inactiveHead = NULL;
@@ -32,7 +32,7 @@ llstack *llstackCreate(void *(*create)(void),
     return newstack;
 }
 
-void llstackDestroy(llstack *stack) {
+void ll_stackDestroy(ll_stack *stack) {
     if (stack == NULL) {
         printf("Error! Tried to destroy a NULL stack!\n");
         exit(EXIT_FAILURE); }
@@ -55,7 +55,7 @@ void llstackDestroy(llstack *stack) {
     stack = NULL;
 }
 
-void *llstackPush(llstack *stack) {
+void *ll_stackPush(ll_stack *stack) {
     if (stack == NULL) {
         printf("Error! Tried to push to a NULL stack!\n");
         exit(EXIT_FAILURE); }
@@ -73,7 +73,7 @@ void *llstackPush(llstack *stack) {
     return data;
 }
 
-void *llstackPop(llstack *stack) {
+void *ll_stackPop(ll_stack *stack) {
     if (stack == NULL) {
         printf("Error! Tried to pop from a NULL stack!\n");
         exit(EXIT_FAILURE); }
@@ -89,14 +89,14 @@ void *llstackPop(llstack *stack) {
     }
 }
 
-unsigned int llstackCount(llstack *stack) {
+unsigned int ll_stackCount(ll_stack *stack) {
     if (stack == NULL) {
         printf("Error! Tried to count nodes in a NULL stack!\n");
         exit(EXIT_FAILURE); }
     return llCount(stack->activeHead);
 }
 
-void llstackReverse(llstack *stack) {
+void ll_stackReverse(ll_stack *stack) {
     if (stack == NULL) {
         printf("Error! Tried to reverse NULL stack!\n");
         exit(EXIT_FAILURE); }

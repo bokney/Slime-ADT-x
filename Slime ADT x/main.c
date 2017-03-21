@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "slime_list_stacks.h"
 
-llstack *ourArena = NULL;
+ll_stack *ourArena = NULL;
 
 typedef struct chungus_ {
     char *string;
@@ -45,30 +45,30 @@ void chuDestroy(void *chu) {
 
 int main(int argc, char **argv) {
     
-    ourArena = llstackCreate(chuCreate, chuInit, chuDestroy);
+    ourArena = ll_stackCreate(chuCreate, chuInit, chuDestroy);
     
     chungus *tmpChung;
-    tmpChung = llstackPush(ourArena);
+    tmpChung = ll_stackPush(ourArena);
     tmpChung->string = "slapping all over ";
-    tmpChung = llstackPush(ourArena);
+    tmpChung = ll_stackPush(ourArena);
     tmpChung->string = "boogie swinging dicks ";
-    tmpChung = llstackPush(ourArena);
+    tmpChung = ll_stackPush(ourArena);
     tmpChung->string = "the musk produced, from ";
-    tmpChung = llstackPush(ourArena);
+    tmpChung = ll_stackPush(ourArena);
     tmpChung->string = "once again, ";
     
-    printf("%i nodes detected\n\n", llstackCount(ourArena));
+    printf("%i nodes detected\n\n", ll_stackCount(ourArena));
     
-    llstackReverse(ourArena);
-    llstackReverse(ourArena);
+    ll_stackReverse(ourArena);
+    ll_stackReverse(ourArena);
     
-    chungus *retrieve = llstackPop(ourArena);
+    chungus *retrieve = ll_stackPop(ourArena);
     while (retrieve != NULL) {
         printf("%s", retrieve->string);
-        retrieve = llstackPop(ourArena);
+        retrieve = ll_stackPop(ourArena);
     }
     
-    llstackDestroy(ourArena);
+    ll_stackDestroy(ourArena);
     
     return 0;
 }
