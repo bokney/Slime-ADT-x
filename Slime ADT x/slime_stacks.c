@@ -1,11 +1,11 @@
 
-//  slime_list_stacks.c
+//  slime_stacks.c
 //  Slime ADT x
 //  [25/02/2017]
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_list_stacks.h"
+#include "slime_stacks.h"
 #include "slime_lists.h"
 #include "slime_list_nodes_access.h"
 

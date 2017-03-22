@@ -1,10 +1,10 @@
 
-//  slime_list_stacks.h
+//  slime_stacks.h
 //  Slime ADT x
 //  [25/02/2017]
 
-#ifndef slime_list_stacks_h
-#define slime_list_stacks_h
+#ifndef slime_stacks_h
+#define slime_stacks_h
 
 typedef struct ll_stack_ ll_stack;
 // forward declaration of ll_stack type
@@ -29,4 +29,4 @@ unsigned int ll_stackCount(ll_stack *stack);
 void ll_stackReverse(ll_stack *stack);
 // flip direction of active list
 
-#endif /* slime_list_stacks_h */
+#endif /* slime_stacks_h */

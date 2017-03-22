@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_list_stacks.h"
+#include "slime_stacks.h"
 
 ll_stack *ourArena = NULL;
 
