@@ -14,4 +14,6 @@ void ll_nodeDestroy(ll_node *node);
 void ll_nodeSetData(ll_node *node, void *data);
 void ll_nodeSetNext(ll_node *node, ll_node *next);
 
+void ll_nodeDestroyAllSpare(void);
+
 #endif /* slime_list_nodes_access_h */
