@@ -12,63 +12,81 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "slime_stacks.h"
+#include "slime_lists.h"
+#include "slime_list_nodes_access.h"
+#include "slime_arenas.h"
+#include "test_structures.h"
 
-ll_stack *ourArena = NULL;
-
-typedef struct chungus_ {
-    char *string;
-}chungus;
-
-void *chuCreate(void) {
-    chungus *newChung = (chungus *)malloc(sizeof(chungus));
-    if (newChung == NULL) {
-        printf("Error creating that chungus!\n");
-        exit(EXIT_FAILURE); }
-    return newChung;
+extern ll_node *spare;
+void countSpare(void) {
+    printf("Counted %i spare nodes.\n", llCount(spare));
 }
 
-void chuInit(void *chu) {
-    if (chu == NULL) {
-        printf("Error! chuInit was passed NULL!\n");
-        exit(EXIT_FAILURE); }
-    chungus *theChung = chu;
-    theChung->string = NULL;
+void inspectBunny(bunny *bun) {
+    printf("\nBunny Name: \t%s\n", getName(bun));
+    printf("Weight: \t\t%i\n", getWeight(bun));
+    printf("Height: \t\t%i\n", getHeight(bun));
+    printf("Fav Food: \t\t%s\n\n", getFoodName(getFavouriteFood(bun)));
 }
 
-void chuDestroy(void *chu) {
-    if (chu == NULL) {
-        printf("Error! chuDestroy was passed NULL!\n");
-        exit(EXIT_FAILURE); }
-    free(chu);
-}
+slime_arena *bunnyArena = NULL;
+ll_node *bunnyList = NULL;
 
 int main(int argc, char **argv) {
     
-    ourArena = ll_stackCreate(chuCreate, chuInit, chuDestroy);
+    printf("\n\tStarting Test!!\n\n");
+    countSpare();
     
-    chungus *tmpChung;
-    tmpChung = ll_stackPush(ourArena);
-    tmpChung->string = "slapping all over ";
-    tmpChung = ll_stackPush(ourArena);
-    tmpChung->string = "boogie swinging dicks ";
-    tmpChung = ll_stackPush(ourArena);
-    tmpChung->string = "the musk produced, from ";
-    tmpChung = ll_stackPush(ourArena);
-    tmpChung->string = "once again, ";
+    printf("Creating an arena for bunnies...\n");
+    bunnyArena = arenaCreate(createBunny, initBunny, destroyBunny);
     
-    printf("%i nodes detected\n\n", ll_stackCount(ourArena));
     
-    ll_stackReverse(ourArena);
-    ll_stackReverse(ourArena);
+    printf("Time to retrieve some bunnies from the arena!\n");
+    bunny *bunnyPtr = arenaRequest(bunnyArena);
+    setBunny(bunnyPtr, "Shit-For-Brains", 10, 25, rand() % 3);
+    inspectBunny(bunnyPtr);
     
-    chungus *retrieve = ll_stackPop(ourArena);
-    while (retrieve != NULL) {
-        printf("%s", retrieve->string);
-        retrieve = ll_stackPop(ourArena);
+    bunny *bunnyPtr2 = arenaRequest(bunnyArena);
+    setBunny(bunnyPtr2, "Greatest Chomper", 12, 26, 2);
+    inspectBunny(bunnyPtr2);
+    
+    countSpare();
+    
+    arenaReturn(bunnyArena, bunnyPtr);
+    arenaReturn(bunnyArena, bunnyPtr2); 
+    
+    printf("\n\tStress Test!!\n\n");
+    for (int i = 0; i != 5000; i++) {
+        llPrepend(&bunnyList, arenaRequest(bunnyArena));
     }
     
-    ll_stackDestroy(ourArena);
+    printf("Added %i elements to bunnyList\n", llCount(bunnyList));
+    countSpare();
+    
+    printf("Returning these elements to the arena!\n");
+    
+    ll_node *traversal = bunnyList;
+    /*while (bunnyList != NULL) {
+        traversal = bunnyList;
+        bunnyList = ll_nodeGetNext(bunnyList);
+        arenaReturn(bunnyArena, ll_nodeGetData(traversal));
+        ll_nodeDestroy(traversal);
+    }*/
+    while (traversal != NULL) {
+        arenaReturn(bunnyArena, ll_nodeGetData(traversal));
+        traversal = ll_nodeGetNext(traversal);
+    }
+    llDestroy(&bunnyList);
+    
+    countSpare();
+    
+    printf("Destroying arena!\n");
+    arenaDestroy(bunnyArena);
+    
+    countSpare();
+    printf("Destroying all spare...\n");
+    ll_nodeDestroyAllSpare();
+    countSpare();
     
     return 0;
 }
