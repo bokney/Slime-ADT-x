@@ -67,10 +67,10 @@
 				EF5292471E59FAD70097D5DB /* slime_lists.h */,
 				EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */,
 				EFE06BFC1E61CD5300B010C8 /* slime_stacks.h */,
-				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
-				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
 				EF23C8B81E8340CA00E84B72 /* slime_arenas.c */,
 				EF23C8B91E8340CA00E84B72 /* slime_arenas.h */,
+				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
+				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
 			);
 			name = ADT;
 			sourceTree = "<group>";

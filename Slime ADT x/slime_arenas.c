@@ -11,6 +11,9 @@
 
 struct slime_arena_ {
     ll_node *unusedHead;
+    unsigned int unusedCount;
+    unsigned int spareLimit;
+    unsigned int padAmount;
     void *(*create)(void);
     void (*init)(void *data);
     void (*destroy)(void *data);

@@ -9,7 +9,7 @@
 #include "slime_lists.h"
 #include "slime_list_nodes_access.h"
 
-struct ll_stack_ {
+struct slime_stack_ {
     ll_node *activeHead;
     ll_node *inactiveHead;
     void *(*create)(void);
@@ -17,25 +17,27 @@ struct ll_stack_ {
     void (*destroy)(void *data);
 };
 
-ll_stack *ll_stackCreate(void *(*create)(void),
-                       void (*init)(void *),
-                       void (*destroy)(void *)) {
-    ll_stack *newstack = (ll_stack *)malloc(sizeof(ll_stack));
-    if (newstack == NULL) {
-        printf("Error allocating memory for new ll_stack!\n");
+void stackCheck(slime_stack *stack, char *reason) {
+    if (stack == NULL) {
+        printf("Error! %s\n", reason);
         exit(EXIT_FAILURE); }
-    newstack->activeHead = NULL;
-    newstack->inactiveHead = NULL;
-    newstack->create = create;
-    newstack->init = init;
-    newstack->destroy = destroy;
-    return newstack;
 }
 
-void ll_stackDestroy(ll_stack *stack) {
-    if (stack == NULL) {
-        printf("Error! Tried to destroy a NULL stack!\n");
-        exit(EXIT_FAILURE); }
+slime_stack *stackCreate(void *(*create)(void),
+                       void (*init)(void *),
+                       void (*destroy)(void *)) {
+    slime_stack *newStack = (slime_stack *)malloc(sizeof(slime_stack));
+    stackCheck(newStack, "Could not allocate memory for new slime_stack!");
+    newStack->activeHead = NULL;
+    newStack->inactiveHead = NULL;
+    newStack->create = create;
+    newStack->init = init;
+    newStack->destroy = destroy;
+    return newStack;
+}
+
+void stackDestroy(slime_stack *stack) {
+    stackCheck(stack, "Tried to destroy a NULL stack!");
     // free list node's datas
     ll_node *traversal = stack->activeHead;
     while (traversal != NULL) {
@@ -55,10 +57,8 @@ void ll_stackDestroy(ll_stack *stack) {
     stack = NULL;
 }
 
-void *ll_stackPush(ll_stack *stack) {
-    if (stack == NULL) {
-        printf("Error! Tried to push to a NULL stack!\n");
-        exit(EXIT_FAILURE); }
+void *stackPush(slime_stack *stack) {
+    stackCheck(stack, "Tried to push to a NULL stack!");
     void *data;
     if (stack->inactiveHead == NULL) {
         data = stack->create();
@@ -73,10 +73,8 @@ void *ll_stackPush(ll_stack *stack) {
     return data;
 }
 
-void *ll_stackPop(ll_stack *stack) {
-    if (stack == NULL) {
-        printf("Error! Tried to pop from a NULL stack!\n");
-        exit(EXIT_FAILURE); }
+void *stackPop(slime_stack *stack) {
+    stackCheck(stack, "Tried to pop from a NULL stack!");
     if (stack->activeHead == NULL) {
         return NULL;
     } else {
@@ -89,16 +87,12 @@ void *ll_stackPop(ll_stack *stack) {
     }
 }
 
-unsigned int ll_stackCount(ll_stack *stack) {
-    if (stack == NULL) {
-        printf("Error! Tried to count nodes in a NULL stack!\n");
-        exit(EXIT_FAILURE); }
+unsigned int stackCount(slime_stack *stack) {
+    stackCheck(stack, "Tried to count nodes in a NULL stack!");
     return llCount(stack->activeHead);
 }
 
-void ll_stackReverse(ll_stack *stack) {
-    if (stack == NULL) {
-        printf("Error! Tried to reverse NULL stack!\n");
-        exit(EXIT_FAILURE); }
+void stackReverse(slime_stack *stack) {
+    stackCheck(stack, "Tried to reverse NULL stack!");
     llReverse(&stack->activeHead);
 }
