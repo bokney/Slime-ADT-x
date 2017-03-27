@@ -6,7 +6,7 @@
 #ifndef slime_priority_lists_h
 #define slime_priority_lists_h
 
-#include "slime_list_nodes_access.h"
+#include "slime_list_nodes_reference.h"
 
 typedef struct pl_container_ pl_container;
 
@@ -20,6 +20,7 @@ void priorityListAmend(pl_container *container,
 
 // sort the containers contents,
 // destroy the container,
+// destroy all pl_nodes,
 // return the sorted list
 ll_node *priorityListDiscardContainer(pl_container *container);
 

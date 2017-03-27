@@ -9,13 +9,11 @@
 #include "slime_list_nodes_access.h"
 
 ll_node *llGetLastNode(ll_node *list) {
-    ll_node *curr = list;
-    ll_node *prev = curr;
-    while (curr != NULL) {
-        prev = curr;
-        curr = ll_nodeGetNext(curr);
+    ll_node *traversal = list;
+    while (ll_nodeGetNext(traversal) != NULL) {
+        traversal = ll_nodeGetNext(traversal);
     }
-    return prev;
+    return traversal;
 }
 
 unsigned int llCount(ll_node *list) {

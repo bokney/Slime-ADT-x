@@ -12,81 +12,35 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "slime_lists.h"
-#include "slime_list_nodes_access.h"
-#include "slime_arenas.h"
+#include "slime_priority_lists.h"
 #include "test_structures.h"
-
-extern ll_node *spare;
-void countSpare(void) {
-    printf("Counted %i spare nodes.\n", llCount(spare));
-}
-
-void inspectBunny(bunny *bun) {
-    printf("\nBunny Name: \t%s\n", getName(bun));
-    printf("Weight: \t\t%i\n", getWeight(bun));
-    printf("Height: \t\t%i\n", getHeight(bun));
-    printf("Fav Food: \t\t%s\n\n", getFoodName(getFavouriteFood(bun)));
-}
-
-slime_arena *bunnyArena = NULL;
-ll_node *bunnyList = NULL;
 
 int main(int argc, char **argv) {
     
-    printf("\n\tStarting Test!!\n\n");
-    countSpare();
+    srand(time(NULL));
     
-    printf("Creating an arena for bunnies...\n");
-    bunnyArena = arenaCreate(createBunny, initBunny, destroyBunny);
+    pl_container *testPL = priorityListCreate();
     
-    
-    printf("Time to retrieve some bunnies from the arena!\n");
-    bunny *bunnyPtr = arenaRequest(bunnyArena);
-    setBunny(bunnyPtr, "Shit-For-Brains", 10, 25, rand() % 3);
-    inspectBunny(bunnyPtr);
-    
-    bunny *bunnyPtr2 = arenaRequest(bunnyArena);
-    setBunny(bunnyPtr2, "Greatest Chomper", 12, 26, 2);
-    inspectBunny(bunnyPtr2);
-    
-    countSpare();
-    
-    arenaReturn(bunnyArena, bunnyPtr);
-    arenaReturn(bunnyArena, bunnyPtr2); 
-    
-    printf("\n\tStress Test!!\n\n");
-    for (int i = 0; i != 5000; i++) {
-        llPrepend(&bunnyList, arenaRequest(bunnyArena));
+    printf("Adding some numbers to the priority list:\n");
+    for (int i = 0; i != 32; i++) {
+        int r = rand() % 100;
+        printf("%i ", r);
+        priorityListAmend(testPL, r, r);
     }
     
-    printf("Added %i elements to bunnyList\n", llCount(bunnyList));
-    countSpare();
+    ll_node *sorted = priorityListDiscardContainer(testPL);
     
-    printf("Returning these elements to the arena!\n");
+    printf("\nReading out the sorted numbers:\n");
     
-    ll_node *traversal = bunnyList;
-    /*while (bunnyList != NULL) {
-        traversal = bunnyList;
-        bunnyList = ll_nodeGetNext(bunnyList);
-        arenaReturn(bunnyArena, ll_nodeGetData(traversal));
-        ll_nodeDestroy(traversal);
-    }*/
+    ll_node *traversal = sorted;
     while (traversal != NULL) {
-        arenaReturn(bunnyArena, ll_nodeGetData(traversal));
+        printf("%i ", ll_nodeGetData(traversal));
         traversal = ll_nodeGetNext(traversal);
     }
-    llDestroy(&bunnyList);
     
-    countSpare();
-    
-    printf("Destroying arena!\n");
-    arenaDestroy(bunnyArena);
-    
-    countSpare();
-    printf("Destroying all spare...\n");
-    ll_nodeDestroyAllSpare();
-    countSpare();
+    llDestroy(&sorted);
     
     return 0;
 }

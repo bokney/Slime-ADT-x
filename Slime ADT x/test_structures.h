@@ -35,4 +35,6 @@ void setBunny(bunny *bun, char *name, unsigned int weight,
 
 char *getFoodName(rabbitFood foodType);
 
+void inspectBunny(bunny *bun);
+
 #endif /* test_structures_h */

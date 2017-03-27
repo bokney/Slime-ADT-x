@@ -98,3 +98,10 @@ char *getFoodName(rabbitFood foodType) {
             return "Its Own Shit... Gross!"; break;
     }
 }
+
+void inspectBunny(bunny *bun) {
+    printf("\nBunny Name: \t%s\n", getName(bun));
+    printf("Weight: \t\t%i\n", getWeight(bun));
+    printf("Height: \t\t%i\n", getHeight(bun));
+    printf("Fav Food: \t\t%s\n\n", getFoodName(getFavouriteFood(bun)));
+}
