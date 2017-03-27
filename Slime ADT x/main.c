@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "slime_list_nodes_access.h"
 #include "slime_lists.h"
 #include "slime_priority_lists.h"
 #include "test_structures.h"
@@ -26,8 +27,9 @@ int main(int argc, char **argv) {
     pl_container *testPL = priorityListCreate();
     
     printf("Adding some numbers to the priority list:\n");
-    for (int i = 0; i != 10000; i++) {
-        int r = rand() % 100;
+    unsigned int amt = 4 + (rand() % 8);
+    for (int i = 0; i != amt; i++) {
+        int r = rand() % 8;
         if (!(i % 8)) r = 0;
         printf("%i ", r);
         priorityListAmend(testPL, r, r);
@@ -46,6 +48,10 @@ int main(int argc, char **argv) {
     
     printf("Destroying the sorted list!\n");
     llDestroy(&sorted);
+    
+    printf("Detected %i spare nodes!\nDestroying all spare!\n", llCount(spare));
+    
+    ll_nodeDestroyAllSpare();
     
     printf("Detected %i spare nodes!\n", llCount(spare));
     
