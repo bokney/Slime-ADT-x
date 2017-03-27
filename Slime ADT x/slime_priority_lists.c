@@ -75,25 +75,15 @@ void priorityListAmend(pl_container *container,
 }
 
 void listSplit(ll_node *source, ll_node **front, ll_node **back) {
-    ll_node *fast;
-    ll_node *slow;
-    // check if list has only 0 or 1 nodes
-    if ((source == NULL) || (ll_nodeGetNext(source) == NULL)) {
-        *front = source;
-        *back = NULL;
-        return;
-    }
-    slow = source;
-    fast = ll_nodeGetNext(source);
-    // move fast by 2 and slow by 1
-    while (fast != NULL) {
+    ll_node *fast = ll_nodeGetNext(source);
+    ll_node *slow = source;
+    while(fast) {
         fast = ll_nodeGetNext(fast);
-        if (fast != NULL) {
-            slow = ll_nodeGetNext(slow);
+        if (fast) {
             fast = ll_nodeGetNext(fast);
+            slow = ll_nodeGetNext(slow);
         }
     }
-    // time to split
     *front = source;
     *back = ll_nodeGetNext(slow);
     ll_nodeSetNext(slow, NULL);
@@ -109,10 +99,10 @@ ll_node *sortedMerge(ll_node *a, ll_node *b) {
     pl_node *nodeB = ll_nodeGetData(b);
     if (nodeA->priority <= nodeB->priority) {
         result = a;
-        ll_nodeSetNext(a, sortedMerge(ll_nodeGetNext(a), b));
+        ll_nodeSetNext(result, sortedMerge(ll_nodeGetNext(a), b));
     } else {
         result = b;
-        ll_nodeSetNext(a, sortedMerge(a, ll_nodeGetNext(b)));
+        ll_nodeSetNext(result, sortedMerge(a, ll_nodeGetNext(b)));
     }
     return result;
 }
@@ -142,5 +132,6 @@ ll_node *priorityListDiscardContainer(pl_container *container) {
     llDestroy(&container->listHead);
     free(container);
     container = NULL;
+    llReverse(&sortedHead);
     return sortedHead;
 }
