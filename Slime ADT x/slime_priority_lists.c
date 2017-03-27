@@ -122,10 +122,12 @@ ll_node *priorityListDiscardContainer(pl_container *container) {
     priorityListCheck(container, "Tried to sort and discard a NULL pl_container!");
     mergeSort(&container->listHead);
     ll_node *sortedHead = NULL;
+    ll_node *zeroes = NULL;
     ll_node *traversal = container->listHead;
     while (traversal != NULL) {
         pl_node *node = ll_nodeGetData(traversal);
-        llPrepend(&sortedHead, node->data);
+        if (node->priority == 0) llPrepend(&zeroes, node->data);
+        else llPrepend(&sortedHead, node->data);
         arenaReturn(pl_nodeArena, node);
         traversal = ll_nodeGetNext(traversal);
     }
@@ -133,5 +135,7 @@ ll_node *priorityListDiscardContainer(pl_container *container) {
     free(container);
     container = NULL;
     llReverse(&sortedHead);
+    traversal = llGetLastNode(sortedHead);
+    ll_nodeSetNext(traversal, zeroes);
     return sortedHead;
 }

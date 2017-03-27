@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     pl_container *testPL = priorityListCreate();
     
     printf("Adding some numbers to the priority list:\n");
-    for (int i = 0; i != 65536; i++) {
+    for (int i = 0; i != 10000; i++) {
         int r = rand() % 100;
         if (!(i % 8)) r = 0;
         printf("%i ", r);
