@@ -14,6 +14,7 @@
 		EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */; };
 		EF796A7D1E8BD9B800498CF6 /* slime_errors.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7B1E8BD9B800498CF6 /* slime_errors.c */; };
 		EF796A801E940BBA00498CF6 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7E1E940BBA00498CF6 /* test.c */; };
+		EF796A841E942BA700498CF6 /* slime_observer.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A821E942BA700498CF6 /* slime_observer.c */; };
 		EFE06BFD1E61CD5300B010C8 /* slime_stacks.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */; };
 		EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */; };
 /* End PBXBuildFile section */
@@ -45,11 +46,12 @@
 		EF796A7C1E8BD9B800498CF6 /* slime_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_errors.h; sourceTree = "<group>"; };
 		EF796A7E1E940BBA00498CF6 /* test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		EF796A7F1E940BBA00498CF6 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		EF796A821E942BA700498CF6 /* slime_observer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_observer.c; sourceTree = "<group>"; };
+		EF796A831E942BA700498CF6 /* slime_observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_observer.h; sourceTree = "<group>"; };
+		EF796A851E943BED00498CF6 /* slime_list_nodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = slime_list_nodes.h; sourceTree = "<group>"; };
 		EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_stacks.c; sourceTree = "<group>"; };
 		EFE06BFC1E61CD5300B010C8 /* slime_stacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_stacks.h; sourceTree = "<group>"; };
 		EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_nodes.c; sourceTree = "<group>"; };
-		EFE06C031E7D771900B010C8 /* slime_list_nodes_reference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = slime_list_nodes_reference.h; sourceTree = "<group>"; };
-		EFE06C041E7D772900B010C8 /* slime_list_nodes_access.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = slime_list_nodes_access.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */,
-				EFE06C041E7D772900B010C8 /* slime_list_nodes_access.h */,
-				EFE06C031E7D771900B010C8 /* slime_list_nodes_reference.h */,
+				EF796A851E943BED00498CF6 /* slime_list_nodes.h */,
 				EF5292461E59FAD70097D5DB /* slime_lists.c */,
 				EF5292471E59FAD70097D5DB /* slime_lists.h */,
 				EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */,
@@ -115,6 +116,8 @@
 				EF796A811E940C6200498CF6 /* Utility */,
 				EF23C8BB1E83EB6800E84B72 /* ADT */,
 				EF23C8BC1E83EB7700E84B72 /* Testing */,
+				EF796A821E942BA700498CF6 /* slime_observer.c */,
+				EF796A831E942BA700498CF6 /* slime_observer.h */,
 			);
 			path = "Slime ADT x";
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF796A841E942BA700498CF6 /* slime_observer.c in Sources */,
 				EF23C8BA1E8340CA00E84B72 /* slime_arenas.c in Sources */,
 				EF23C8BF1E83EBED00E84B72 /* test_structures.c in Sources */,
 				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,

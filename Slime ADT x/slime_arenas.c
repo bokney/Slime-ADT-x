@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "slime_arenas.h"
-#include "slime_list_nodes_access.h"
+#include "slime_errors.h"
 #include "slime_lists.h"
 
 struct slime_arena_ {
@@ -19,17 +19,11 @@ struct slime_arena_ {
     void (*destroy)(void *data);
 };
 
-void arenaCheckExists(slime_arena *arena, char *string) {
-    if (arena == NULL) {
-        printf("Error! %s\n", string);
-        exit(EXIT_FAILURE); }
-}
-
 slime_arena *arenaCreate(void *(*create)(void),
                          void (*init)(void *),
                          void (*destroy)(void *)) {
     slime_arena *newArena = (slime_arena *)malloc(sizeof(slime_arena));
-    arenaCheckExists(newArena, "Failed to allocate memory for new arena!");
+    if (newArena == NULL) errorReport("Failed to allocate memory for new arena!", true);
     newArena->unusedHead = NULL;
     newArena->create = create;
     newArena->init = init;
@@ -38,11 +32,11 @@ slime_arena *arenaCreate(void *(*create)(void),
 }
 
 void arenaDestroy(slime_arena *arena) {
-    arenaCheckExists(arena, "Tried to destroy a nonexistant arena!");
+    if (arena == NULL) errorReport("Tried to destroy a nonexistant arena!", true);
     ll_node *traversal = arena->unusedHead;
     while (traversal != NULL) {
-        arena->destroy(ll_nodeGetData(traversal));
-        traversal = ll_nodeGetNext(traversal);
+        arena->destroy(traversal->data);
+        traversal = traversal->next;
     }
     llDestroy(&arena->unusedHead);
     free(arena);
@@ -50,13 +44,13 @@ void arenaDestroy(slime_arena *arena) {
 }
 
 void *arenaRequest(slime_arena *arena) {
-    arenaCheckExists(arena, "Requested an instance from a nonexistant arena!");
+    if (arena == NULL) errorReport("Requested an instance from a nonexistant arena!", true);
     void *data;
     if (arena->unusedHead != NULL) {
         // oh  shit
         ll_node *tmpNode = arena->unusedHead;
-        arena->unusedHead = ll_nodeGetNext(arena->unusedHead);
-        data = ll_nodeGetData(tmpNode);
+        arena->unusedHead = arena->unusedHead->next;
+        data = tmpNode->data;
         ll_nodeDestroy(tmpNode);
     } else {
         data = arena->create();
@@ -66,9 +60,7 @@ void *arenaRequest(slime_arena *arena) {
 }
 
 void arenaReturn(slime_arena *arena, void *data) {
-    arenaCheckExists(arena, "Tried to return an instance to a nonexistant arena!");
-    if (data == NULL) {
-        printf("Error! Tried to return a NULL instance to an arena!\n");
-        exit(EXIT_FAILURE); }
+    if (arena == NULL) errorReport("Tried to return an instance to a nonexistant arena!", true);
+    if (data == NULL) errorReport("Tried to return a NULL instance to an arena!", true);
     llPrepend(&arena->unusedHead, data);
 }

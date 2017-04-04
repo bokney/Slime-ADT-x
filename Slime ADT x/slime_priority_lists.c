@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "slime_priority_lists.h"
+#include "slime_errors.h"
 #include "slime_lists.h"
 #include "slime_arenas.h"
-#include "slime_list_nodes_access.h"
 
 typedef struct pl_node_ {
     void *data;
@@ -75,18 +75,18 @@ void priorityListAmend(pl_container *container,
 }
 
 void listSplit(ll_node *source, ll_node **front, ll_node **back) {
-    ll_node *fast = ll_nodeGetNext(source);
+    ll_node *fast = source->next;
     ll_node *slow = source;
     while(fast) {
-        fast = ll_nodeGetNext(fast);
+        fast = fast->next;
         if (fast) {
-            fast = ll_nodeGetNext(fast);
-            slow = ll_nodeGetNext(slow);
+            fast = fast->next;
+            slow = slow->next;
         }
     }
     *front = source;
-    *back = ll_nodeGetNext(slow);
-    ll_nodeSetNext(slow, NULL);
+    *back = slow->next;
+    slow->next = NULL;
 }
 
 ll_node *sortedMerge(ll_node *a, ll_node *b) {
@@ -95,14 +95,14 @@ ll_node *sortedMerge(ll_node *a, ll_node *b) {
     if (a == NULL) return b;
     else if (b == NULL) return a;
     // pick a or b and recurse
-    pl_node *nodeA = ll_nodeGetData(a);
-    pl_node *nodeB = ll_nodeGetData(b);
+    pl_node *nodeA = a->data;
+    pl_node *nodeB = b->data;
     if (nodeA->priority <= nodeB->priority) {
         result = a;
-        ll_nodeSetNext(result, sortedMerge(ll_nodeGetNext(a), b));
+        result->next = sortedMerge(a->next, b);
     } else {
         result = b;
-        ll_nodeSetNext(result, sortedMerge(a, ll_nodeGetNext(b)));
+        result->next = sortedMerge(a, b->next);
     }
     return result;
 }
@@ -111,7 +111,7 @@ void mergeSort(ll_node **head2merge) {
     ll_node *head = *head2merge;
     ll_node *a, *b;
     // base case
-    if ((head == NULL) || (ll_nodeGetNext(head) == NULL)) return;
+    if ((head == NULL) || (head->next == NULL)) return;
     listSplit(head, &a, &b);
     mergeSort(&a);
     mergeSort(&b);
@@ -125,17 +125,17 @@ ll_node *priorityListDiscardContainer(pl_container *container) {
     ll_node *zeroes = NULL;
     ll_node *traversal = container->listHead;
     while (traversal != NULL) {
-        pl_node *node = ll_nodeGetData(traversal);
+        pl_node *node = traversal->data;
         if (node->priority == 0) llPrepend(&zeroes, node->data);
         else llPrepend(&sortedHead, node->data);
         arenaReturn(pl_nodeArena, node);
-        traversal = ll_nodeGetNext(traversal);
+        traversal = traversal->next;
     }
     llDestroy(&container->listHead);
     free(container);
     container = NULL;
     llReverse(&sortedHead);
     traversal = llGetLastNode(sortedHead);
-    ll_nodeSetNext(traversal, zeroes);
+    traversal->next = zeroes;
     return sortedHead;
 }
