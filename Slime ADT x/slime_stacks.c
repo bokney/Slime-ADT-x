@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "slime_errors.h"
 #include "slime_stacks.h"
 #include "slime_lists.h"
 #include "slime_list_nodes_access.h"
@@ -18,9 +19,7 @@ struct slime_stack_ {
 };
 
 void stackCheck(slime_stack *stack, char *reason) {
-    if (stack == NULL) {
-        printf("Error! %s\n", reason);
-        exit(EXIT_FAILURE); }
+    if (stack == NULL) errorReport(reason, true);
 }
 
 slime_stack *stackCreate(void *(*create)(void),

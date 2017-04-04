@@ -12,6 +12,8 @@
 		EF5292401E59F9BD0097D5DB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF52923F1E59F9BD0097D5DB /* main.c */; };
 		EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292461E59FAD70097D5DB /* slime_lists.c */; };
 		EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */; };
+		EF796A7D1E8BD9B800498CF6 /* slime_errors.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7B1E8BD9B800498CF6 /* slime_errors.c */; };
+		EF796A801E940BBA00498CF6 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7E1E940BBA00498CF6 /* test.c */; };
 		EFE06BFD1E61CD5300B010C8 /* slime_stacks.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */; };
 		EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,10 @@
 		EF5292471E59FAD70097D5DB /* slime_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_lists.h; sourceTree = "<group>"; };
 		EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_priority_lists.c; sourceTree = "<group>"; };
 		EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_priority_lists.h; sourceTree = "<group>"; };
+		EF796A7B1E8BD9B800498CF6 /* slime_errors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_errors.c; sourceTree = "<group>"; };
+		EF796A7C1E8BD9B800498CF6 /* slime_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_errors.h; sourceTree = "<group>"; };
+		EF796A7E1E940BBA00498CF6 /* test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
+		EF796A7F1E940BBA00498CF6 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_stacks.c; sourceTree = "<group>"; };
 		EFE06BFC1E61CD5300B010C8 /* slime_stacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_stacks.h; sourceTree = "<group>"; };
 		EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_nodes.c; sourceTree = "<group>"; };
@@ -80,6 +86,8 @@
 			children = (
 				EF23C8BD1E83EBED00E84B72 /* test_structures.c */,
 				EF23C8BE1E83EBED00E84B72 /* test_structures.h */,
+				EF796A7E1E940BBA00498CF6 /* test.c */,
+				EF796A7F1E940BBA00498CF6 /* test.h */,
 			);
 			name = Testing;
 			sourceTree = "<group>";
@@ -104,10 +112,20 @@
 			isa = PBXGroup;
 			children = (
 				EF52923F1E59F9BD0097D5DB /* main.c */,
+				EF796A811E940C6200498CF6 /* Utility */,
 				EF23C8BB1E83EB6800E84B72 /* ADT */,
 				EF23C8BC1E83EB7700E84B72 /* Testing */,
 			);
 			path = "Slime ADT x";
+			sourceTree = "<group>";
+		};
+		EF796A811E940C6200498CF6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				EF796A7B1E8BD9B800498CF6 /* slime_errors.c */,
+				EF796A7C1E8BD9B800498CF6 /* slime_errors.h */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,8 +188,10 @@
 				EF23C8BA1E8340CA00E84B72 /* slime_arenas.c in Sources */,
 				EF23C8BF1E83EBED00E84B72 /* test_structures.c in Sources */,
 				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,
+				EF796A801E940BBA00498CF6 /* test.c in Sources */,
 				EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */,
 				EFE06BFD1E61CD5300B010C8 /* slime_stacks.c in Sources */,
+				EF796A7D1E8BD9B800498CF6 /* slime_errors.c in Sources */,
 				EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */,
 				EF5292401E59F9BD0097D5DB /* main.c in Sources */,
 			);
