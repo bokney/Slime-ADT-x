@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "slime_list_nodes.h"
+#include "slime_list_nodes_access.h"
 #include "slime_errors.h"
 
 #define LL_CREATE_FAILURE       "Failed to allocate memory for new ll_node!"

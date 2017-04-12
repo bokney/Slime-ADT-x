@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "slime_lists.h"
+#include "slime_list_nodes_access.h"
 
 ll_node *llGetLastNode(ll_node *list) {
     ll_node *traversal = list;

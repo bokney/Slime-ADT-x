@@ -6,7 +6,7 @@
 #ifndef slime_lists_h
 #define slime_lists_h
 
-#include "slime_list_nodes.h"
+#include "slime_list_nodes_reference.h"
 
 ll_node *llGetLastNode(ll_node *list);
 

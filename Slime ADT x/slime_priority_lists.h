@@ -6,7 +6,7 @@
 #ifndef slime_priority_lists_h
 #define slime_priority_lists_h
 
-#include "slime_list_nodes.h"
+#include "slime_list_nodes_reference.h"
 
 typedef struct pl_container_ pl_container;
 
