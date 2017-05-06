@@ -9,7 +9,7 @@
 #include "slime_priority_lists.h"
 #include "slime_errors.h"
 #include "slime_lists.h"
-#include "slime_arenas.h"
+#include "slime_buckets.h"
 
 typedef struct pl_node_ {
     void *data;
@@ -20,7 +20,7 @@ struct pl_container_ {
     ll_node *listHead;
 };
 
-slime_arena *pl_nodeArena = NULL;
+slimeBucket *pl_nodeBucket = NULL;
 
 void *pl_nodeCreate(void) {
     pl_node *newPLNode = (pl_node *)malloc(sizeof(pl_node));
@@ -46,8 +46,8 @@ void pl_nodeDestroy(void *pln) {
     free(pln);
 }
 
-void pl_nodeArenaCreate(void) {
-    pl_nodeArena = arenaCreate(pl_nodeCreate, pl_nodeInit, pl_nodeDestroy);
+void pl_nodeBucketCreate(void) {
+    pl_nodeBucket = bucketCreate(pl_nodeCreate, pl_nodeInit, pl_nodeDestroy);
 }
 
 void priorityListCheck(pl_container *container, char *reason) {
@@ -57,7 +57,7 @@ void priorityListCheck(pl_container *container, char *reason) {
 }
 
 pl_container *priorityListCreate(void) {
-    if (pl_nodeArena == NULL) pl_nodeArenaCreate();
+    if (pl_nodeBucket == NULL) pl_nodeBucketCreate();
     pl_container *newPL = (pl_container *)malloc(sizeof(pl_container));
     priorityListCheck(newPL, "Failed to create new priority list container!");
     newPL->listHead = NULL;
@@ -68,7 +68,7 @@ void priorityListAmend(pl_container *container,
                        void *data,
                        unsigned int priority) {
     priorityListCheck(container, "Tried to amend a NULL pl_container!");
-    pl_node *node = arenaRequest(pl_nodeArena);
+    pl_node *node = bucketRequest(pl_nodeBucket);
     node->data = data;
     node->priority = priority;
     llPrepend(&container->listHead, node);
@@ -128,7 +128,7 @@ ll_node *priorityListDiscardContainer(pl_container *container) {
         pl_node *node = traversal->data;
         if (node->priority == 0) llPrepend(&zeroes, node->data);
         else llPrepend(&sortedHead, node->data);
-        arenaReturn(pl_nodeArena, node);
+        bucketReturn(pl_nodeBucket, node);
         traversal = traversal->next;
     }
     llDestroy(&container->listHead);

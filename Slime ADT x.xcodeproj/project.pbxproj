@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF23C8BA1E8340CA00E84B72 /* slime_arenas.c in Sources */ = {isa = PBXBuildFile; fileRef = EF23C8B81E8340CA00E84B72 /* slime_arenas.c */; };
 		EF23C8BF1E83EBED00E84B72 /* test_structures.c in Sources */ = {isa = PBXBuildFile; fileRef = EF23C8BD1E83EBED00E84B72 /* test_structures.c */; };
 		EF5292401E59F9BD0097D5DB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EF52923F1E59F9BD0097D5DB /* main.c */; };
 		EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */ = {isa = PBXBuildFile; fileRef = EF5292461E59FAD70097D5DB /* slime_lists.c */; };
@@ -15,8 +14,10 @@
 		EF796A7D1E8BD9B800498CF6 /* slime_errors.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7B1E8BD9B800498CF6 /* slime_errors.c */; };
 		EF796A801E940BBA00498CF6 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A7E1E940BBA00498CF6 /* test.c */; };
 		EF796A841E942BA700498CF6 /* slime_observer.c in Sources */ = {isa = PBXBuildFile; fileRef = EF796A821E942BA700498CF6 /* slime_observer.c */; };
-		EFE06BFD1E61CD5300B010C8 /* slime_stacks.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */; };
 		EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */ = {isa = PBXBuildFile; fileRef = EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */; };
+		EFF320361EBBFD8E00103A1D /* slime_buckets.c in Sources */ = {isa = PBXBuildFile; fileRef = EFF320341EBBFD8E00103A1D /* slime_buckets.c */; };
+		EFF320391EBD029100103A1D /* fruit.c in Sources */ = {isa = PBXBuildFile; fileRef = EFF320371EBD029100103A1D /* fruit.c */; };
+		EFF3203C1EBD3C2900103A1D /* slime_stacks.c in Sources */ = {isa = PBXBuildFile; fileRef = EFF3203A1EBD3C2900103A1D /* slime_stacks.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,8 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EF23C8B81E8340CA00E84B72 /* slime_arenas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_arenas.c; sourceTree = "<group>"; };
-		EF23C8B91E8340CA00E84B72 /* slime_arenas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_arenas.h; sourceTree = "<group>"; };
 		EF23C8BD1E83EBED00E84B72 /* test_structures.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_structures.c; sourceTree = "<group>"; };
 		EF23C8BE1E83EBED00E84B72 /* test_structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_structures.h; sourceTree = "<group>"; };
 		EF52923C1E59F9BD0097D5DB /* Slime ADT x */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Slime ADT x"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,9 +49,13 @@
 		EF796A7F1E940BBA00498CF6 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		EF796A821E942BA700498CF6 /* slime_observer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_observer.c; sourceTree = "<group>"; };
 		EF796A831E942BA700498CF6 /* slime_observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_observer.h; sourceTree = "<group>"; };
-		EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_stacks.c; sourceTree = "<group>"; };
-		EFE06BFC1E61CD5300B010C8 /* slime_stacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_stacks.h; sourceTree = "<group>"; };
 		EFE06BFE1E7A10A600B010C8 /* slime_list_nodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_list_nodes.c; sourceTree = "<group>"; };
+		EFF320341EBBFD8E00103A1D /* slime_buckets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_buckets.c; sourceTree = "<group>"; };
+		EFF320351EBBFD8E00103A1D /* slime_buckets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_buckets.h; sourceTree = "<group>"; };
+		EFF320371EBD029100103A1D /* fruit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fruit.c; sourceTree = "<group>"; };
+		EFF320381EBD029100103A1D /* fruit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fruit.h; sourceTree = "<group>"; };
+		EFF3203A1EBD3C2900103A1D /* slime_stacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slime_stacks.c; sourceTree = "<group>"; };
+		EFF3203B1EBD3C2900103A1D /* slime_stacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slime_stacks.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +77,10 @@
 				EF656A711E9DDCDF002B14E2 /* slime_list_nodes_reference.h */,
 				EF5292461E59FAD70097D5DB /* slime_lists.c */,
 				EF5292471E59FAD70097D5DB /* slime_lists.h */,
-				EFE06BFB1E61CD5300B010C8 /* slime_stacks.c */,
-				EFE06BFC1E61CD5300B010C8 /* slime_stacks.h */,
-				EF23C8B81E8340CA00E84B72 /* slime_arenas.c */,
-				EF23C8B91E8340CA00E84B72 /* slime_arenas.h */,
+				EFF320341EBBFD8E00103A1D /* slime_buckets.c */,
+				EFF320351EBBFD8E00103A1D /* slime_buckets.h */,
+				EFF3203A1EBD3C2900103A1D /* slime_stacks.c */,
+				EFF3203B1EBD3C2900103A1D /* slime_stacks.h */,
 				EF5292491E5C8A7A0097D5DB /* slime_priority_lists.c */,
 				EF52924A1E5C8A7A0097D5DB /* slime_priority_lists.h */,
 			);
@@ -91,6 +94,8 @@
 				EF23C8BE1E83EBED00E84B72 /* test_structures.h */,
 				EF796A7E1E940BBA00498CF6 /* test.c */,
 				EF796A7F1E940BBA00498CF6 /* test.h */,
+				EFF320371EBD029100103A1D /* fruit.c */,
+				EFF320381EBD029100103A1D /* fruit.h */,
 			);
 			name = Testing;
 			sourceTree = "<group>";
@@ -191,12 +196,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF796A841E942BA700498CF6 /* slime_observer.c in Sources */,
-				EF23C8BA1E8340CA00E84B72 /* slime_arenas.c in Sources */,
 				EF23C8BF1E83EBED00E84B72 /* test_structures.c in Sources */,
 				EF5292481E59FAD70097D5DB /* slime_lists.c in Sources */,
+				EFF320361EBBFD8E00103A1D /* slime_buckets.c in Sources */,
 				EF796A801E940BBA00498CF6 /* test.c in Sources */,
+				EFF3203C1EBD3C2900103A1D /* slime_stacks.c in Sources */,
+				EFF320391EBD029100103A1D /* fruit.c in Sources */,
 				EF52924B1E5C8A7A0097D5DB /* slime_priority_lists.c in Sources */,
-				EFE06BFD1E61CD5300B010C8 /* slime_stacks.c in Sources */,
 				EF796A7D1E8BD9B800498CF6 /* slime_errors.c in Sources */,
 				EFE06C001E7A10A600B010C8 /* slime_list_nodes.c in Sources */,
 				EF5292401E59F9BD0097D5DB /* main.c in Sources */,

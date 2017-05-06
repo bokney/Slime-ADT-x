@@ -1,32 +1,35 @@
 
 //  slime_stacks.h
 //  Slime ADT x
-//  [25/02/2017]
+//  [06/05/2017]
 
 #ifndef slime_stacks_h
 #define slime_stacks_h
 
-typedef struct slime_stack_ slime_stack;
-// forward declaration of slime_stack type
+typedef struct slimeStack_ slimeStack;
 
-slime_stack *stackCreate(void *(*create)(void),
-                       void (*init)(void *),
-                       void (*destroy)(void *));
-void stackDestroy(slime_stack *stack);
+// returns a fresh instance of slimeStack
+slimeStack *slimeStackCreate(void *(*create)(void),
+                             void (*init)(void *),
+                             void (*destroy)(void *));
 
-void *stackPush(slime_stack *stack);
-// returns a new or previously
-// inactive node's data and
-// puts the node in active
+// puts all in active into bucket
+// bucket is then destroyed
+// and stack sent to stackBucket
+void slimeStackDestroy(slimeStack *stack);
 
-void *stackPop(slime_stack *stack);
-// returns the first active node's
-// data while deactivating the node
+// returns a fresh node which is
+// added to the active list
+void *slimeStackPush(slimeStack *stack);
 
-unsigned int stackCount(slime_stack *stack);
-// returns amount of active nodes
+// returns data of first node in active
+// while also putting it in the bucket
+void *slimeStackPop(slimeStack *stack);
 
-void stackReverse(slime_stack *stack);
-// flip direction of active list
+// reverse direction of active list
+void slimeStackReverse(slimeStack *stack);
+
+// count amount of active nodes
+unsigned int slimeStackCount(slimeStack *stack);
 
 #endif /* slime_stacks_h */
